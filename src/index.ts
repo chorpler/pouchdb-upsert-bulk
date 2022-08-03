@@ -1,3 +1,5 @@
+import PouchDB from 'pouchdb-core';
+
 export function upsertBulk (docs, opts = {}) {
   const allDocsOpts = {
     keys: docs.map(doc => doc._id)
@@ -21,4 +23,3 @@ export function upsertBulk (docs, opts = {}) {
       })
     }))
     .then(docs => this.bulkDocs(docs))
-}
