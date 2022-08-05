@@ -9,9 +9,9 @@ const pkg = require('../package.json')
 //   });
 // };
 export default Object.assign({}, config, {
-  ouput: {
+  output: {
     file: pkg.module,
-    format: 'es',
+    format: 'cjs',
   },
 });
 // Object.assign({}, config, {

@@ -1093,7 +1093,7 @@ declare namespace PouchDB {
 }
 
 //
-declare module 'pouchdb-core' {
+declare module 'pouchdb-bulk-upsert' {
   const PouchDb: PouchDB.Static;
   export = PouchDb;
 }

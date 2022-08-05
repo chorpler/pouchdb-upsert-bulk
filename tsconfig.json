@@ -17,7 +17,8 @@
     "outDir": "compiled",
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
-    "declaration": false,
+    "declaration": true,
+    "emitDeclarationOnly": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "forceConsistentCasingInFileNames": true

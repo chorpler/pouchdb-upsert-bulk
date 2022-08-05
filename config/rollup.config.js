@@ -18,12 +18,15 @@ const pkg = require('../package.json')
 //   });
 // };
 export default Object.assign({}, config, {
-  dest: pkg.main,
-  format: 'cjs',
+
+  output: {
+    file: pkg.main,
+    format: 'es',
+  },
   plugins: config.plugins.concat([
     typescript({
       rollupCommonJSResolveHack: true,
     }),
-    buble(),
+    // buble(),
   ]),
 });

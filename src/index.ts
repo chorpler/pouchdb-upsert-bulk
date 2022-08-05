@@ -53,25 +53,26 @@ export interface BulkUpsertResponse extends AllDocsResponse {
   replace ?: boolean;
 }
 
-const upsertBulk = async function(docs:PouchDocs, opts?:BulkUpsertOptions ):Promise<BulkUpsertResponse|PouchDocError[]|Response[]> {
+export const upsertBulk = async function(docs:PouchDocs, opts?:BulkUpsertOptions ):Promise<BulkUpsertResponse|PouchDocError[]|Response[]> {
   const self:PouchDB.Database = this;
   const allDocsOpts:AllDocsOpts = {
-    keys: docs.map(doc => doc._id)
+    keys: docs.map(doc => doc._id),
+    include_docs: true,
   }
   // const bulkGetOpts:BulkGetOpts = {
   //   docs: docs.map(doc => doc._id)
   // }
-  let bulkUpsertOpts = opts != null ? opts : {};
+  // let bulkUpsertOpts = opts != null ? opts : {};
 
-  if (!opts.replace) {
-    allDocsOpts.include_docs = true
+  if (opts != null && opts.replace) {
+    allDocsOpts.include_docs = false;
     // bulkGetOpts.include_docs = true
   }
 
-  return self.allDocs(allDocsOpts)
+  return self.allDocs(allDocsOpts).then(res => {
   // .then(res => res.results.map(doc => {
   // return self.bulkGet(bulkGetOpts)
-    .then(res => docs.map(doc => {
+      return docs.map(doc => {
       // const row = res.rows.find(r => (r as AllDocsResponseRow).id === doc._id)
       let goodRow:AllDocsResponseRow;
       let errorRow:AllDocsResponseErrorRow;
@@ -98,10 +99,10 @@ const upsertBulk = async function(docs:PouchDocs, opts?:BulkUpsertOptions ):Prom
           _rev: goodRow.value.rev
         })
       }
-    }))
-    .then(docs => {
-      // let goodDocs:BulkDocs = docs.filter(r => r._id)
-      return self.bulkDocs(docs);
     });
-  };
+  }).then(docs => {
+    // let goodDocs:BulkDocs = docs.filter(r => r._id)
+    return self.bulkDocs(docs);
+  });
+};
 
