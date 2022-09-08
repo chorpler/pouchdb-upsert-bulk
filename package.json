@@ -1,15 +1,19 @@
 {
   "name": "pouchdb-upsert-bulk",
-  "version": "0.0.0-development",
+  "version": "7.5.0-rc.1",
   "description": "Upsert bulk plugin for PouchDB",
   "main": "dist/pouchdb-upsert-build.cjs.js",
   "module": "dist/pouchdb-upsert-build.es6.js",
   "esnext": "dist/pouchdb-upsert-build.esnext.js",
+  "brVars": {
+    "name": "PouchUpsertBulkPlugin",
+    "package": "pouchdb.upsert.bulk.plugin"
+  },
   "scripts": {
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "rollup --config && rollup --config rollup.config.es6.js && rollup --config rollup.config.esnext.js",
     "prepublish": "npm run build",
-    "pretest": "standard",
+    "pretestOld": "standard",
     "test": "ava",
     "semantic-release": "semantic-release pre && npm run build && npm publish && semantic-release post"
   },
@@ -45,7 +49,7 @@
   "files": [
     "dist"
   ],
-  "config": {
+  "configComments": {
     "ghooks": {
       "commit-msg": "validate-commit-msg",
       "pre-push": "npm test"
