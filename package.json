@@ -39,7 +39,7 @@
     "prebuild": "rm -rf dist && mkdir dist",
     "build": "rollup --config && rollup --config rollup.config.es6.js && rollup --config rollup.config.esnext.js",
     "prepublish": "npm run build",
-    "pretest": "standard",
+    "pretestOld": "standard",
     "test": "ava",
     "semantic-release": "semantic-release pre && npm run build && npm publish && semantic-release post"
   },
