@@ -16,8 +16,8 @@
     "package": "pouchdb.upsert.bulk"
   },
   "scripts": {
-    "build:prod": "npm-run-all clean rollup browserify minify",
-    "build:dev": "npm-run-all clean rollup browserify",
+    "build:prod": "npm-run-all clean compile rollup browserify minify",
+    "build:dev": "npm-run-all clean compile rollup browserify",
     "build": "npm run build:prod",
     "buildOrg": "rollup --config config/rollup.config.js && rollup --config config/rollup.config.es6.js && rollup --config config/rollup.config.esnext.js",
     "clean": "rimraf dist/* lib/* compiled/* types/* && mkdirp dist lib compiled types",
@@ -29,6 +29,7 @@
     "rollup": "npm-run-all --parallel rollup-cjs rollup-es",
     "browserify:rollup": "browserify -t [ babelify --global --presets [ @babel/preset-env ] ] -t brfs -p bundle-collapser/plugin -s $npm_package_brVars_name lib/index.browser.js > dist/$npm_package_brVars_package.js",
     "browserify": "npm run browserify:rollup",
+    "package": "npm pack",
     "prebuild": "npm run clean",
     "prepublish": "npm run build",
     "pretest": "standard",
@@ -98,7 +99,11 @@
     "validate-commit-msg": "2.14.0"
   },
   "files": [
-    "dist"
+    "compiled",
+    "dist",
+    "lib",
+    "types",
+    "src"
   ],
   "configOriginal": {
     "ghooks": {
