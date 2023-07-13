@@ -18,6 +18,7 @@
     "downlevelIteration": true,
     "allowSyntheticDefaultImports": true,
     "declaration": true,
+    "declarationDir": "types",
     "emitDeclarationOnly": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
